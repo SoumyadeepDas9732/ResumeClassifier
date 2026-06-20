@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Resume Screening Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+    <div class="navbar-custom">
+
+        <div class="brand">
+
+            Resume Dashboard
+
+        </div>
+
+        <div>
+
+            <a
+            href="/"
+            class="btn btn-success me-2">
+
+                + Upload More
+
+            </a>
+
+            <button
+            id="themeToggle"
+            class="btn btn-outline-light">
+
+                🌙 Theme
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+<!-- Dashboard Cards -->
+
+<div class="row mb-4" style="margin-top: 80px;">
+
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5>Total Candidates</h5>
+                <h2>{{ total_candidates }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5>Roles Identified</h5>
+                <h2>{{ role_counts|length }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5>Average Score</h5>
+                <h2>{{ avg_score }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Role Distribution -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-dark text-white">
+
+        <h4 class="mb-0">
+            Role Distribution
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+                    <th>Role</th>
+                    <th>Number of Candidates</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for role,count in role_counts.items() %}
+
+                <tr>
+
+                    <td>{{ role }}</td>
+
+                    <td>{{ count }}</td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- Candidates Grouped By Role -->
+
+{% for role, candidates in grouped.items() %}
+
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <h4 class="mb-0">
+
+            {{ role }}
+
+            ({{ candidates|length }} Candidates)
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Rank</th>
+                    <th>Candidate Name</th>
+                    <th>Score</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for c in candidates %}
+
+                <tr>
+
+                    <td>
+
+                        {{ loop.index }}
+
+                    </td>
+
+                    <td>
+
+                        <a href="/candidate/{{ c[0] }}"
+                        class="text-decoration-none">
+
+                            {{ c[1] }}
+
+                        </a>
+
+                    </td>
+
+                    <td>
+
+                        <span class="badge bg-success">
+
+                            {{ c[6] }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<script src="{{ url_for('static', filename='theme.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+</body>
+
+</html>

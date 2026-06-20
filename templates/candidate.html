@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Candidate Profile</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+    <div class="navbar-custom">
+
+        <div class="brand">
+
+            Candidate Profile
+
+        </div>
+
+        <button
+        id="themeToggle"
+        class="btn btn-outline-light">
+
+            🌙 Theme
+
+        </button>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-header bg-dark text-white">
+
+            <div class="d-flex align-items-center">
+
+                <div
+                style="
+                width:70px;
+                height:70px;
+                border-radius:50%;
+                background:#2563eb;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:26px;
+                font-weight:bold;
+                margin-right:20px;">
+
+                    {{ candidate[1][0] }}
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ candidate[1] }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <h5>Primary Role</h5>
+
+                    <h3 class="text-primary">
+
+                        {{ candidate[5] }}
+
+                    </h3>
+
+                    <div class="progress mb-3">
+
+                        <div
+                            class="progress-bar bg-primary"
+                            style="width: {{ candidate[9] }}%">
+
+                            {{ candidate[9] }}%
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <h5>Secondary Match</h5>
+
+                    <h3 class="text-warning">
+
+                        {{ candidate[10] }}
+
+                    </h3>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar bg-warning"
+                            style="width: {{ candidate[11] }}%">
+
+                            {{ candidate[11] }}%
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <h5>
+                Resume Strength
+            </h5>
+
+            <p>
+                {{ rating }}
+            </p>
+
+            <hr>
+
+            <h5>
+                Skills Identified
+            </h5>
+
+            <p>
+
+                {% if candidate[7] %}
+
+                    {% for skill in candidate[7].split(',') %}
+
+                        <span class="badge bg-primary me-1 mb-1">
+
+                            {{ skill }}
+
+                        </span>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    No skills found
+
+                {% endif %}
+
+            </p>
+
+            <hr>
+
+            <h5>Email</h5>
+
+            <p>
+
+                {{ candidate[2] }}
+
+            </p>
+
+            <hr>
+
+            <h5>Phone</h5>
+
+            <p>
+
+                {{ candidate[3] }}
+
+            </p>
+
+            <hr>
+
+            <h5>Education</h5>
+
+            <p>
+
+                {{ candidate[4] }}
+
+            </p>
+
+            <hr>
+
+            <a href="/results"
+            class="btn btn-secondary">
+
+                ← Back To Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='theme.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+
+</body>
+
+
+</html>

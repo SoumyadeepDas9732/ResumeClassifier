@@ -1,0 +1,10 @@
+database.db
+structure.py
+uploads/
+__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+.vscode/
+.idea/

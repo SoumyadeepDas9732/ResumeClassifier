@@ -14,7 +14,7 @@ from sklearn.metrics import classification_report
 # --------------------------
 
 df = pd.read_csv(
-    "dataset/UpdatedResumeDataSet.csv"
+    "dataset/training_data.csv"
 )
 
 print("Dataset Loaded")
